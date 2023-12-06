@@ -14,7 +14,6 @@ jobs:
     MONGODB_PASSWORD: Vi6vc2m2SZofCyfj
     PORT: 8080
   test:
-    environment: testing
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
