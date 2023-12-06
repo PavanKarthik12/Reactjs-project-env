@@ -1,0 +1,41 @@
+name: Deployment
+on:
+  push:
+    branches:
+      - master
+      - dev
+env:
+  MONGODB_DB_NAME: gh-demo
+jobs:
+  env:
+    MONGODB_DB_NAME: gh-demo
+    MONGODB_CLUSTER_ADDRESS: cluster0.vi3aj3e.mongodb.net
+    MONGODB_USERNAME: pvarada72
+    MONGODB_PASSWORD: Vi6vc2m2SZofCyfj
+    PORT: 8080
+  test:
+    environment: testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: npm-deps-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Run server
+        run: npm start & npx wait-on http://127.0.0.1:$PORT #if you want to use any env variable in workflow definition file use it with $ symbol
+      - name: Run tests
+        run: npm test
+      - name: Output information
+        run: echo "MONGODB_DB_NAME:${{ env.MONGODB_DB_NAME }}"
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output information
+        run: |        
+          echo "MONGODB_DB_NAME : ${{ env.MONGODB_DB_NAME }}"
