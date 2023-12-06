@@ -7,13 +7,13 @@ on:
 env:
   MONGODB_DB_NAME: gh-demo
 jobs:
-  env:
-    MONGODB_DB_NAME: gh-demo
-    MONGODB_CLUSTER_ADDRESS: cluster0.vi3aj3e.mongodb.net
-    MONGODB_USERNAME: pvarada72
-    MONGODB_PASSWORD: Vi6vc2m2SZofCyfj
-    PORT: 8080
   test:
+    env:
+      MONGODB_DB_NAME: gh-demo
+      MONGODB_CLUSTER_ADDRESS: cluster0.vi3aj3e.mongodb.net
+      MONGODB_USERNAME: pvarada72
+      MONGODB_PASSWORD: Vi6vc2m2SZofCyfj
+      PORT: 8080
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
