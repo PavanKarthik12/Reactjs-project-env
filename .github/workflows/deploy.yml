@@ -8,6 +8,7 @@ env:
   MONGODB_DB_NAME: gh-demo
 jobs:
   test:
+    environment: dev
     env:
       MONGODB_DB_NAME: gh-demo
       MONGODB_CLUSTER_ADDRESS: cluster0.vi3aj3e.mongodb.net
